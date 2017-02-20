@@ -1,11 +1,54 @@
 {
-  "name": "bot-testing",
+  "name": "createmobileshop",
   "version": "1.0.0",
-  "description": "",
-  "main": "80shops.js",
+  "description": "Mobile Shop Creation Tool",
+  "main": "server-createmobileshop.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "npm test"
   },
-  "author": "",
-  "license": "ISC"
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/amolc/createmobileshop.git"
+  },
+  "keywords": [
+    "mobileshop"
+  ],
+  "author": "Amol Chawathe, Saurabh Undre, Swapnil Sharma, Nitin Dolli",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/amolc/createmobileshop/issues"
+  },
+  "homepage": "https://github.com/amolc/createmobileshop#readme",
+  "dependencies": {
+    "angular-bootstrap-datetimepicker": "^0.4.0",
+    "async": "^1.5.2",
+    "body-parser": "^1.15.2",
+    "connect": "^3.5.0",
+    "cookie-parser": "^1.4.3",
+    "cron": "^1.1.0",
+    "debug": "^2.2.0",
+    "dotenv": "^2.0.0",
+    "easyimage": "^2.1.0",
+    "express": "^4.13.4",
+    "express-validator": "^2.20.9",
+    "fs-extra": "^0.30.0",
+    "jsonwebtoken": "^7.1.9",
+    "md5": "^2.2.1",
+    "mkdirp": "^0.5.1",
+    "moment": "^2.11.2",
+    "morgan": "^1.7.0",
+    "multer": "^1.2.1",
+    "mysql": "^2.11.1",
+    "mysql-crud": "^0.1.4",
+    "ng-google-signin": "^0.1.0",
+    "node-gcm": "^0.14.2",
+    "node-mailjet": "^2.0.2",
+    "nodemailer": "^2.6.4",
+    "passport": "^0.3.2",
+    "serve-favicon": "^2.3.0",
+    "serve-static": "^1.11.1",
+    "stripe": "^4.11.0",
+    "use-strict": "^1.0.1",
+    "vhost": "^3.0.2"
+  }
 }
