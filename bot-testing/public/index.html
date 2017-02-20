@@ -1,0 +1,161 @@
+  <!DOCTYPE html>
+  <html lang="en" ng-app="80Shops">
+
+  <head>
+
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <meta name="description" content="">
+      <meta name="author" content="">
+      <!--<meta name="google-signin-client_id" content="609435177292-7k76qe0l06vcjmv58l8fteiht3aq9c5k.apps.googleusercontent.com">-->
+
+      <title>80Shops</title>
+
+      <!-- Bootstrap Core CSS -->
+      <link href="css/bootstrap.min.css" rel="stylesheet">
+
+      <!-- Custom CSS -->
+      <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" type="text/css">
+      <link href="css/shop.css" rel="stylesheet">
+
+      <link href="css/massautocomplete.theme.css" rel="stylesheet" type="text/css">
+
+
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.8/angular.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.14/angular-ui-router.min.js"></script>
+
+      <!--<script src="https://apis.google.com/js/api.js"></script>-->
+
+
+      <script src="lib/bower_components/angular-directive.g-signin/google-plus-signin.js"></script>
+      <script src="js/app.js"></script>
+      <script src="js/config.js"></script>
+      <script src="js/homeController.js"></script>
+      <script src="js/registerController.js"></script>
+      <script src="js/autocomplete.js"></script>
+      <script src="js/factory.js"></script>
+
+      <script src="lib/angular-storage.min.js"></script>
+      <script src="lib/massautocomplete.min.js"></script>
+      <script src="lib/textAngular-sanitize.min.js"></script>
+      <script src="lib/angular-messages.min.js"></script>
+      <script src="lib/underscore-min.js"></script>
+
+      <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+      <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+      <!--[if lt IE 9]>
+          <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+          <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+      <![endif]-->
+
+  </head>
+
+  <body >
+
+  
+    <div ui-view>
+
+      </div>
+
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+
+
+<!--footer-->
+<footer class="footer1">
+<div class="container">
+
+<div class="row"><!-- row -->
+
+
+
+
+                <div class="col-lg-4 col-md-4"><!-- widgets column center -->
+
+                        <ul class="list-unstyled clear-margins"><!-- widgets -->
+
+                          <li class="widget-container widget_recent_news"><!-- widgets list -->
+
+                                <h1 class="title-widget">Contact Detail </h1>
+
+                                <div class="footerp">
+
+                                <h2 class="title-median">80shops Pte ltd.</h2>
+
+                                <p><b>8-54, 60 Paya Lebar Road,</b></p>
+                                <p><b>Singapore - 409051.
+
+                                                            </div>
+
+                                </li>
+                          </ul>
+                       </div>
+                </div>
+
+</div>
+</footer>
+<!--header-->
+
+<div class="footer-bottom">
+
+  <div class="container">
+
+    <div class="row">
+
+      <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+
+        <div class="copyright">
+
+          © 2016 80shops. All Rights Reserved.
+
+        </div>
+
+      </div>
+
+      <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+
+        <div class="design">
+
+
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+</body>
+     <script src="js/jquery.js"></script>
+
+  <!-- Bootstrap Core JavaScript -->
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/affix.js"></script>
+<script type="text/javascript">
+  $(document).ready( function() {
+    $('#myCarousel').carousel({
+      interval:   4000
+    });
+
+    var clickEvent = false;
+    $('#myCarousel').on('click', '.nav a', function() {
+          clickEvent = true;
+          $('.nav li').removeClass('active');
+          $(this).parent().addClass('active');
+        }).on('slid.bs.carousel', function(e) {
+        if(!clickEvent) {
+          var count = $('.nav').children().length -1;
+          var current = $('.nav li.active');
+          current.removeClass('active').next().addClass('active');
+          var id = parseInt(current.data('slide-to'));
+          if(count == id) {
+              $('.nav li').first().addClass('active');
+          }
+        }
+          clickEvent = false;
+        });
+  });
+</script>
+  </html>

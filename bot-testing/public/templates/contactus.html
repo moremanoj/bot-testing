@@ -1,0 +1,420 @@
+<style type="text/css">
+body{
+      background: #f9f9f9;
+  }
+  body fieldset {
+    border: none;
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 10px;
+}
+}
+body fieldset:valid > button {
+  opacity: 1;
+}
+body fieldset:valid > button:hover {
+  opacity: 1;
+  background: #CD3C3C;
+}
+.contact-form button {
+  width: 100%;
+  opacity: .5;
+  cursor: pointer;
+  -webkit-transition: all .4s;
+  transition: all .4s;
+  border: none;
+  padding: 20px;
+  background-color: #f65252;
+  color: white;
+  outline: none;
+  margin-top: 15px;
+  font-size: 18px;
+}
+body .kickass_field {
+  margin: auto;
+  position: relative;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  height: 100px;
+  right: 0;
+  width: 100%;
+}
+body .kickass_field_1 {
+  margin: auto;
+  position: relative;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  height: 200px;
+  right: 0;
+  width: 100%;
+}
+body .kickass_field_1 lable {
+  font-size: 18px;
+  position: absolute;
+  height: 100px;
+  overflow: hidden;
+  left: 0;
+  width: 100%;
+  top: 0px;
+  text-align: left;
+  color: #F65252;
+  font-weight: 700;
+  
+  pointer-events: none;
+  -webkit-transition: all .2s .3s;
+  transition: all .2s .3s;
+}
+body .kickass_field lable {
+  font-size: 18px;
+  position: absolute;
+  height: 100px;
+  overflow: hidden;
+  left: 0;
+  width: 100%;
+  top: 16px;
+  text-align: left;
+  color: #F65252;
+  font-weight: 700;
+  
+  pointer-events: none;
+  -webkit-transition: all .2s .3s;
+  transition: all .2s .3s;
+}
+body .kickass_field lable span {
+      font-size: 19px;
+    color: #303030;
+    clear: left;
+    opacity: 0;
+    font-weight: 400;
+    display: block;
+    -webkit-transition: opacity .5s .0s;
+    transition: opacity .5s .0s;
+}
+body .kickass_field lable:after {
+  width: 4px;
+  content: '';
+  height: 8px;
+  border-bottom: 2px solid #f65252;
+  border-right: 2px solid #f65252;
+  -webkit-transform: translateX(-10px) rotate(45deg);
+          transform: translateX(-10px) rotate(45deg);
+  position: absolute;
+  left: 120%;
+  top: 30px;
+  -webkit-transition: all .2s;
+  transition: all .2s;
+}
+
+/*===Start Text Area Lable===*/
+body .kickass_field_text lable {
+  font-size: 14px;
+  position: absolute;
+  height: 100px;
+  overflow: hidden;
+  left: 0;
+  width: 100%;
+  top: 50px;
+  text-align: left;
+  color: #F65252;
+  font-weight: 700;
+  
+  pointer-events: none;
+  -webkit-transition: all .2s .3s;
+  transition: all .2s .3s;
+}
+body .kickass_field_text lable span {
+  font-size: 10px;
+  color: #9f9fb5;
+  clear: left;
+  opacity: 0;
+  font-weight: 400;
+  display: block;
+  -webkit-transition: opacity .5s .0s;
+  transition: opacity .5s .0s;
+}
+body .kickass_field_text lable:after {
+  width: 4px;
+  content: '';
+  height: 8px;
+  border-bottom: 2px solid #f65252;
+  border-right: 2px solid #f65252;
+  -webkit-transform: translateX(-10px) rotate(45deg);
+          transform: translateX(-10px) rotate(45deg);
+  position: absolute;
+  left: 120%;
+  top: 30px;
+  -webkit-transition: all .2s;
+  transition: all .2s;
+}
+/*===End===*/
+
+body .kickass_field input {
+  border: none;
+  color: #303030;
+  font-weight: 400;
+  padding: 40px 0px 18px 0px;
+  background: transparent;
+  letter-spacing: 1px;
+  outline: none;
+  
+  height: 30px;
+  width: 100%;
+  -webkit-transition-property: -webkit-transform;
+  transition-property: -webkit-transform;
+  transition-property: transform;
+  transition-property: transform, -webkit-transform;
+  font-size: 18px;
+  box-shadow: 0px 2px #f65252;
+}
+body .kickass_field input:focus + lable {
+  color: #F65252;
+  font-size: 10px;
+  top: 10px;
+  -webkit-transition: all .2s .0s;
+  transition: all .2s .0s;
+}
+body .kickass_field input:focus + lable span {
+  opacity: 1;
+  -webkit-transition: opacity .5s .3s;
+  transition: opacity .5s .3s;
+}
+body .kickass_field input:valid + lable {
+  font-size: 10px;
+  top: 10px;
+  color: #f65252;
+}
+body .kickass_field input[type="password"]:valid + lable span {
+  color: #99B62F;
+}
+body .kickass_field input:valid + lable span {
+  opacity: 1;
+  -webkit-transition: opacity .3s 0s;
+  transition: opacity .3s 0s;
+}
+body .kickass_field input:valid + lable::after {
+  display: block;
+  left: 100%;
+}
+body .kickass_field input:invalid {
+  color: #f9f9f9;
+}
+body .kickass_field input:focus:invalid {
+  color: #6E738A;
+}
+
+
+.kickass_field_1 textarea {
+  border: none;
+  color: #6E738A;
+  font-weight: 400;
+  background: transparent;
+  letter-spacing: 1px;
+  outline: none;
+  
+  height: 130px;
+  width: 100%;
+  -webkit-transition-property: -webkit-transform;
+  transition-property: -webkit-transform;
+  transition-property: transform;
+  transition-property: transform, -webkit-transform;
+  font-size: 14px;
+  box-shadow: 0px 2px #f65252;
+}
+.kickass_field_1 textarea:focus + lable {
+  color: #F65252;
+  font-size: 10px;
+  top: 10px;
+  -webkit-transition: all .2s .0s;
+  transition: all .2s .0s;
+}
+.kickass_field_1 textarea:focus + lable span {
+  opacity: 1;
+  -webkit-transition: opacity .5s .3s;
+  transition: opacity .5s .3s;
+}
+
+
+
+</style>
+<div class="top-bar">
+    <ul class="nav navbar-nav navbar-right nav-pills">
+        <li>
+            Track Order
+        </li>
+        <li>
+            Help
+        </li>
+        <li>
+            <a href="" ng-click="goRegister()" style="padding:0px;"> Login</a>
+        </li>
+        <li>
+            <a href="#" style="padding:0px;"> Contact Us</a>
+        </li>
+     </ul>
+</div>
+    <!-- Navigation -->       <!-- Navigation -->
+    <!-- Navigation -->
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-default affix-top" role="navigation" id="BB-nav">
+    <div class="container-fluid">
+        <div class="container-fluid nav-container">
+<!--            <div class="navbar-header">-->
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".BB-nav">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+<!--            </div>-->
+
+             <ul class="nav navbar-nav navbar-left nav-pills">
+                <li>
+                <a href="index.html" style="padding:0px;"><img src="img/logo.png" class="img-responsive logo"></a>
+                </li>
+             </ul>
+            <ul id="menu-menu" class="nav navbar-nav BB-nav collapse navbar-collapse nav-cat">
+
+                  <li class="dropdown-active">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="padding-left:10px;">Categories<b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                      <a href="#" class="list-group-item"><img src="img/sidebar/Gifts, Sports & Toys.svg">Gifts, Sports & Toys</a>
+                    <a href="#" class="list-group-item"><img src="img/sidebar/Apparel, Textiles & Accessories.svg">Apparel, Textiles & Accessories</a>
+                    <a href="#" class="list-group-item"><img src="img/sidebar/Packaging, Advertising & Office.svg">Packaging, Advertising</a>
+                    <a href="#" class="list-group-item"><img src="img/sidebar/Metallurgy, Chemicals & Plastics.svg">Chemicals & Plastics</a>
+                    <a href="#" class="list-group-item"><img src="img/sidebar/plug.svg">Electrical Components </a>
+                    <a href="#" class="list-group-item"><img src="img/sidebar/sofa.svg">Home, Lights & Construction</a>
+                    <a href="#" class="list-group-item"><img src="img/sidebar/monitor.svg">Electronics</a>
+                    <a href="#" class="list-group-item"><img src="img/sidebar/truck.svg">Auto & Transportation</a>
+                    <a href="#" class="list-group-item"><img src="img/sidebar/leaf.svg">Agriculture & Food</a>
+                    <a href="#" class="list-group-item"><img src="img/sidebar/list.svg" style="height: 13px;margin-top: 3px;">All Categories</a>
+                    </ul>
+                  </li>
+                  </ul>
+            </ul>
+
+            <ul class="col-sm-8 nav navbar-nav navbar-left nav-pills">
+
+                <li>
+                <form role="form" class="home-search">
+                    <!-- Search Field -->
+                        <div class="row">
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <input class="form-control" type="text" name="search" placeholder="Search" required/>
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-danger" type="submit"><span class="glyphicon glyphicon-search" aria-hidden="true"><span style="margin-left:10px;">Search</span></button>
+                                    </span>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+
+                    </form>
+                </li>
+
+            </ul>
+            <li style="float: right;list-style-type: none;padding: 13px;">Business Account</li>
+        </div>
+    </div>
+</nav>
+
+    <!-- Page Content -->
+    <div class="container-fluid">
+
+        <div class="row">
+
+            <!-- <form action="enquirey.php" style="    background: #f9f9f9;">
+               <div class='container contact-form'>
+                 <div>
+                    <br>
+                    <br>
+                     <fieldset>
+                       <div class='kickass_field'>
+                         <input name="name" maxlength='30' required='required'>
+                         <lable>
+                           Name
+                         </lable>
+                       </div>
+                       <div class='kickass_field'>
+                         <input name="email" maxlength='30' required='required' type='email'>
+                         <lable>
+                           Email address
+                         </lable>
+                       </div>
+                       <div class='kickass_field'>
+                         <input name="mob" maxlength='30' pattern='.{,10}' required='required' type="number">
+                         <lable>
+                           Mobile No.
+
+                         </lable>
+                       </div>
+                       <div class='kickass_field'>
+                         <input name="cname" maxlength='30' required='required'>
+                         <lable>
+                           Company Name
+                         </lable>
+                       </div>
+                       <div class='kickass_field'>
+                         <input name="business" maxlength='30' required='required'>
+                         <lable>
+                           Business Activity
+                         </lable>
+                       </div>
+                       <div class='kickass_field_1'>
+                         <textarea name="msg"></textarea>
+                         
+                         <lable>
+                           Message
+                           
+                         </lable>
+                       </div>
+                       <button style="margin-top: 10px;">SEND</button>
+                     </fieldset>
+                   </br>
+                   
+                   <p>
+                    
+                   </p>
+                   
+                 </div>
+              </div>
+            </form> -->
+            <form ng-submit="userinquiry()">
+                                               <fieldset>
+                                                  <legend> Registration Details </legend>
+                                                      <div class="form-group col-md-6">
+                                                      <label for="first_name">First name</label>
+                     <input type="text" class="form-control" name= "first_name" ng-model="userinfo.first_name" id="first_name" placeholder="First Name">
+                                                  </div>
+
+                                                  <div class="form-group col-md-6">
+                                                      <label for="last_name">Last name</label>
+                                                      <input type="text" ng-model="userinfo.last_name" class="form-control" name="last_name" id="" placeholder="Last Name">
+                                                  </div>
+
+                                                  <div class="form-group col-md-6">
+                                                      <label for="">Contact No</label>
+                                                      <input type="contact" ng-model="userinfo.contactNumber" class="form-control" name="contactNumber" id="" placeholder="Contact No">
+                                                  </div>
+
+                                                  <div class="form-group col-md-6">
+                                                      <label for="">Email</label>
+                                                      <input type="email" ng-model="userinfo.email" class="form-control" name="email" id="" placeholder="Email">
+                                                  </div>
+
+                                                  <div class="form-group col-md-6">
+                                                      <label for="pass_no">Description</label>
+                                                      <input type="text" ng-model="userinfo.Description" class="form-control" name="Description" id="" placeholder="Massege">
+                                                  </div>
+                                                  <div>
+                                                    <input type="submit" id="formData" value="submit" />
+
+                                                  </div>
+                                                 </fieldset>
+                                                 </form>
+        </div>
+
+    </div>

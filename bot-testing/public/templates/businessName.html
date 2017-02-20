@@ -1,0 +1,90 @@
+<!--page1-->
+
+
+    <!-- Navigation -->
+  <nav class="navbar navbar-default affix-top" role="navigation" id="BB-nav">
+      <div class="container-fluid">
+          <div class="container-fluid nav-container">
+                  <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".BB-nav">
+                      <span class="sr-only">Toggle navigation</span>
+                      <span class="icon-bar"></span>
+                      <span class="icon-bar"></span>
+                      <span class="icon-bar"></span>
+                  </button>
+               <ul class="nav navbar-nav navbar-left nav-pills">
+                  <li>
+                  <a href="index.html"><img src="img/logo.png" class="img-responsive logo"></a>
+                  </li>
+               </ul>
+          </div>
+      </div>
+  </nav>
+  <div class="container">
+    <div class="row business-box">
+      <div class="col-sm-12">
+        <div ng-show="page1" style="background:#f3f3f3;">
+          <form name="form_businessname" ng-submit="form_businessname.$valid && goPage1()" novalidate>
+            <h3>What is name your business ?</h3>
+              <div class="box-wrapper">
+                <input name="business_name" type="text" value="" ng-model="business_details.business_name" placeholder="Enter your business name" required>
+                  <div ng-messages="form_businessname.$submitted && form_businessname.business_name.$error" class="error_msg">
+                    <div ng-message="required">Enter Your Business Name</div>
+                  </div>
+                  <button class="round-btn" type="submit" value="next" >NEXT <i class="fa fa-angle-right" aria-hidden="true"></i></button>
+              </div>
+          </form>
+        </div>
+
+        <div ng-show="page2" style="background:#f3f3f3;">
+          <form name="form_category" ng-submit="form_category.$valid && goPage2()" novalidate>
+            <h3>Tell Us About Your Business.</h3>
+            <div class="box-wrapper">
+                <div mass-autocomplete>
+                  <input placeholder="Select a Category" ng-model="dirty.value" mass-autocomplete-item="autocomplete_options">
+                </div>
+
+                <select name="member_type" class="form-control" ng-model="business_details.MembershipType" ng-options="member.Type for member in MemberType" placeholder="Select Membership type" name="MemberType" required >
+                  <option value="">Select Membership type</option>
+                </select>
+
+                <div ng-messages="form_category.$submitted && form_category.member_type.$error" class="error_msg">
+                    <div ng-message="required">Please select your Membership Type</div>
+                </div>
+                <button class="round-btn" type="submit" value="next" >NEXT <i class="fa fa-angle-right" aria-hidden="true"></i></button>
+              </div>
+          </form>
+        </div>
+
+        <div ng-show="page3" style="background:#f3f3f3;">
+
+            <form name="form_personalinfo" ng-submit="form_personalinfo.$valid && doRegister()" novalidate>
+            <h3>Enter Personal Details to Start your account</h3>
+              <div class="box-wrapper">
+                <input name="mobile" ng-model="business_details.MobileNo" type="text" placeholder="Enter Mobile Number" required>
+                <div ng-messages="form_personalinfo.$submitted && form_personalinfo.mobile.$error" class="error_msg">
+                    <div ng-message="required">Please Enter valid mobile Number</div>
+                </div>
+
+                <input name="email" ng-model="business_details.Email" placeholder="Enter Email Address" type="email"
+                 ng-pattern='/^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i'  required>
+                 <div ng-messages="form_personalinfo.$submitted && form_personalinfo.email.$error" class="error_msg" >
+                       <div ng-message="required">Please enter your email address.</div>
+                       <div ng-message="email">Please enter valid email.</div>
+                       <div ng-message="pattern">Please enter valid email.</div>
+                     </div>
+
+                <input name="password" ng-model="business_details.Password" placeholder="Enter Password" type="Password" required>
+                <div ng-messages="form_personalinfo.$submitted && form_personalinfo.password.$error" class="error_msg">
+                    <div ng-message="required">Please Enter password</div>
+                </div>
+
+
+                <button class="round-btn" type="submit" value="GO" >NEXT <i class="fa fa-angle-right" aria-hidden="true"></i></button>
+                </div>
+            </form>
+          </div>
+      </div>
+    </div>
+  </div>
+
+</div>

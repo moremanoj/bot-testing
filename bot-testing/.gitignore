@@ -1,0 +1,5 @@
+web/node_modules
+api/node_modules
+web/admin/bower_components
+web/admin/lib/bower_components
+node_modules
