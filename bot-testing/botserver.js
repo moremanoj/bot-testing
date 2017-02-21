@@ -6,7 +6,7 @@ var bodyParser = require('body-parser');
 var serveStatic = require('serve-static');
 var vhost = require('vhost');
 
-var serverport = 7575;
+var serverport = 2001;
 
 var app = connect();
 // Define the web folder connect and router
