@@ -1,24 +1,24 @@
 {
-  "name": "createmobileshop",
+  "name": "Airlinechatbot",
   "version": "1.0.0",
-  "description": "Mobile Shop Creation Tool",
-  "main": "server-createmobileshop.js",
+  "description": "Airline chat bot application",
+  "main": "webserver.js",
   "scripts": {
     "test": "npm test"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/amolc/createmobileshop.git"
+    "url": "git+https://github.com/moremanoj/bot-testing.git"
   },
   "keywords": [
-    "mobileshop"
+    "chatbot"
   ],
   "author": "Amol Chawathe, Saurabh Undre, Swapnil Sharma, Nitin Dolli",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/amolc/createmobileshop/issues"
+    "url": "https://github.com/moremanoj/bot-testing.git"
   },
-  "homepage": "https://github.com/amolc/createmobileshop#readme",
+  "homepage": "https://github.com/moremanoj/bot-testing.git",
   "dependencies": {
     "angular-bootstrap-datetimepicker": "^0.4.0",
     "async": "^1.5.2",
