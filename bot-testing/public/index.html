@@ -1,10 +1,152 @@
 
+<html>
+<head>
+  <srcipt src="lib/jquery.min.js"></script>
+	<title>API Example</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+	<script type="text/javascript">
+		var accessToken = "d2d6acff5f4a4c75b2fa9fb189047ba0";
+		var baseUrl = "https://api.api.ai/v1/";
 
-<img src="img/pravola-logo.svg"/>
-<link href="https://api.motion.ai/sdk/webchat.css" rel="stylesheet" type="text/css">
-<script src="https://api.motion.ai/sdk/webchat.js"></script>
-<script>
-  motionAI_Init('33122?color=62a8ea&sendBtn=SEND&inputBox=Type+something...&token=ee4919c8e61800fa7251f05c60b98b67',true,400,470,'img/img_chat_button.png');
-   /* botID with access token, display bot icon?, modal width, modal height, call to action image */
-  /* you may also invoke motionAI_Open(); to manually open the modal */
-</script>
+    $(document).ready(function() {
+			$("#input").keypress(function(event) {
+				if (event.which == 13) {
+					event.preventDefault();
+					send();
+				}
+			});
+			$("#rec").click(function(event) {
+				switchRecognition();
+			});
+		});
+
+		var recognition;
+		function startRecognition() {
+			recognition = new webkitSpeechRecognition();
+			recognition.onstart = function(event) {
+				updateRec();
+			};
+			recognition.onresult = function(event) {
+				var text = "";
+			    for (var i = event.resultIndex; i < event.results.length; ++i) {
+			    	text += event.results[i][0].transcript;
+			    }
+			    setInput(text);
+				stopRecognition();
+			};
+			recognition.onend = function() {
+				stopRecognition();
+			};
+			recognition.lang = "en-US";
+			recognition.start();
+		}
+
+		function stopRecognition() {
+			if (recognition) {
+				recognition.stop();
+				recognition = null;
+			}
+			updateRec();
+		}
+		function switchRecognition() {
+			if (recognition) {
+				stopRecognition();
+			} else {
+				startRecognition();
+			}
+		}
+		function setInput(text) {
+			$("#input").val(text);
+			send();
+		}
+		function updateRec() {
+			$("#rec").text(recognition ? "Stop" : "Speak");
+		}
+		function send() {
+			var text = $("#input").val();
+			$.ajax({
+				type: "POST",
+				url: baseUrl + "query?v=20150910",
+				contentType: "application/json; charset=utf-8",
+				dataType: "json",
+				headers: {
+					"Authorization": "Bearer " + accessToken
+				},
+				data: JSON.stringify({ query: text, lang: "en", sessionId: "somerandomthing" }),
+				success: function(data) {
+          console.log(data);
+					setResponse(JSON.stringify(data.result.fulfillment.speech,undefined,2));
+				},
+				error: function() {
+					setResponse("Internal Server Error");
+				}
+			});
+			setResponse("Loading...");
+		}
+		function setResponse(val) {
+      console.log(val);
+			$("#response").text(val);
+		}
+	</script>
+	<style type="text/css">
+
+    .chat-box{
+      padding: 10px;
+      width: 100%;
+      font-size: 17px;
+      border-radius: 35px;
+      box-shadow: none;
+      border: 2px solid #bdbdbd;
+    }
+    .top-box{
+      position: relative;
+      padding: 30px 0;
+    }
+    .send-btn{
+      position: absolute;
+      right: 0px;
+      padding: 11px 50px;
+      font-size: 18px;
+      border-radius: 40px;
+      background: #4498ef;
+      border: none;
+      color: #fff;
+      top: 31px;
+    }
+    .home-container{
+      max-width: 480px;
+      margin: 50px auto;
+      text-align: center;
+    }
+    textarea{
+      width: 100%;
+      border-radius: 10px;
+      border: 2px solid #dadada;
+      font-size: 18px;
+      margin: 50px 0 0;
+      height: 300px;
+      overflow: scroll;
+      overflow-x: hidden;
+      padding: 20px;
+      color: #000;
+    }
+    :focus{
+      outline: 0px;
+    }
+	</style>
+</head>
+<body>
+  <div class="container home-container">
+    <img src="img/pravola-logo.svg"/ style="width: 230px;">
+
+	 <textarea id="response" cols="40" rows="20" placeholder="response"></textarea>
+   <div class="col-sm-12 main-wrapper">
+      <div class="top-box">
+         <input id="input" type="text" class="chat-box"> <button id="rec" class="send-btn">Speak</button>
+     </div>
+   </div>
+	</div>
+</div>
+</body>
+</html>
