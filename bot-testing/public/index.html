@@ -14,7 +14,9 @@
 				if (event.which == 13) {
 					event.preventDefault();
 					send();
+          event.currentTarget.value = "";
 				}
+
 			});
 			$("#rec").click(function(event) {
 				switchRecognition();
@@ -65,6 +67,7 @@
 		}
 		function send() {
 			var text = $("#input").val();
+
 			$.ajax({
 				type: "POST",
 				url: baseUrl + "query?v=20150910",
@@ -86,7 +89,9 @@
 		}
 		function setResponse(val) {
       console.log(val);
-			$("#response").text(val);
+      var str = val;
+      str = str.replace( /"/g, "" );
+			$("#response").text(str);
 		}
 	</script>
 	<style type="text/css">
