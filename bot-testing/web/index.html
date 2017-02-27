@@ -1,0 +1,83 @@
+
+<html ng-app="mybot">
+<head>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular.js"></script>
+  <srcipt src="lib/jquery.min.js"></script>
+  <script src="js/app.js"></script>
+
+
+	<title>Pravola jets</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+	<script type="text/javascript">
+
+	</script>
+	<style type="text/css">
+
+    .chat-box{
+      padding: 10px;
+      width: 100%;
+      font-size: 17px;
+      border-radius: 35px;
+      box-shadow: none;
+      border: 2px solid #bdbdbd;
+    }
+    .top-box{
+      position: relative;
+      padding: 30px 0;
+    }
+    .send-btn{
+      position: absolute;
+      right: 0px;
+      padding: 11px 50px;
+      font-size: 18px;
+      border-radius: 40px;
+      background: #4498ef;
+      border: none;
+      color: #fff;
+      top: 31px;
+    }
+    .home-container{
+      max-width: 480px;
+      margin: 50px auto;
+      text-align: center;
+    }
+    textarea{
+      width: 100%;
+      border-radius: 10px;
+      border: 2px solid #dadada;
+      font-size: 18px;
+      margin: 50px 0 0;
+      height: 300px;
+      overflow: scroll;
+      overflow-x: hidden;
+      padding: 20px;
+      color: #000;
+    }
+    :focus{
+      outline: 0px;
+    }
+	</style>
+</head>
+<body ng-controller="botCtrl">
+
+
+    <div class="container home-container">
+    <img src="img/pravola-logo.svg"/ style="width: 230px;">
+    <div  class="container" style="overflow-y: auto; height:400px; width:300px; border:1px solid grey">
+      <div id="bot">
+      </div>
+      <div>
+        <img src="">
+      </div>
+	       <!--<textarea type="hidden" disabled  id="response" cols="40" rows="20" placeholder="response"></textarea>-->
+   </div>
+   <div>
+     <div class="col-sm-12 main-wrapper">
+       <div class="top-box">
+         <input id="input" ng-keypress="addMessage($event)" type="text" class="chat-box">
+       </div>
+     </div>
+   </div>
+</body>
+</html>
