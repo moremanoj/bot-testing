@@ -14,7 +14,7 @@ var web = connect();
 
 //var app = require('../api/api');
 
-web.use(serveStatic('public'));
+web.use(serveStatic('web'));
 app.use('/',web);
 
 
