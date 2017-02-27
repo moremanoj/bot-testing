@@ -1,11 +1,13 @@
 'use strict';
+//var transporter = transporter();
 var SampleApplicationModule = angular.module('mybot',[]);
 
-SampleApplicationModule.controller('botCtrl',function($scope,$sce,$timeout){
+SampleApplicationModule.controller('botCtrl',function($scope,$sce,$timeout,$http){
   $scope.session_lst =[];
   $scope.resp="";
-  var accessToken = "620f380c9ded4ed6b1dd8e0f02a36a5a";
+  var accessToken = "b6328ec8aaca46e98d4352e17a509f7e";
   var baseUrl = "https://api.api.ai/v1/";
+  var baseURL= "http://localhost:2001/api/";
   //var session_lst= [];
 
   $scope.addMessage = function(event) {
@@ -82,12 +84,11 @@ SampleApplicationModule.controller('botCtrl',function($scope,$sce,$timeout){
     $scope.session_lst.push({user : text});
     $scope.resp += ' <p > user: '+ text +'</p>';
     $("#bot").empty();
-    window.scrollTo(300, 500);
-
+    $($scope.resp).appendTo('#bot');
     //console.log(session_lst);
     $scope.$watch('$scope.session_lst', function (newValue, oldValue, scope) {
     //Do anything with $scope.letters
-
+    $scope.email_id="";
     $.ajax({
       type: "POST",
       url: baseUrl + "query?v=20150910",
@@ -101,15 +102,31 @@ SampleApplicationModule.controller('botCtrl',function($scope,$sce,$timeout){
         console.log(data.status.code);
         if(data.status.code == 200)
         {
+          if(data.result.parameters["send_mail"] != undefined && data.result.parameters['Email'] != null) {
+            var obj = data.result.parameters;
+            console.log(obj)
+            if(obj.Email){
+              console.log("email:",obj.Email);
+              /*$http.post(baseURL + 'sendmail' ,obj).success(function(res) {
+                  console.log(res);
+                  //$scope.outdated=res;
+                  //console.log($scope.outdated);
+              })*/
+            }
+            /*$http.post(baseURL + 'sendmail' ,obj).success(function(res) {
+                console.log(res);
+                //$scope.outdated=res;
+                //console.log($scope.outdated);
+            });*/
+            $scope.email_id= data.result.parameters.Email;
+          }
           var str = JSON.stringify(data.result.fulfillment.speech,undefined,2);
           str = str.replace( /"/g, "" );
 
           $scope.resp += '<p style="align:left"> bot: '+ str +'</p></br>';
-
           $("#bot").empty();
           $($scope.resp).appendTo('#bot');
-
-          $("#bot").scrollTop($("#bot").prop('scrollHeight'));
+          //$("#bot").scrollTop($("#bot").prop('scrollHeight'));
 
           $scope.session_lst.push({bot : str});
         }
@@ -122,4 +139,11 @@ SampleApplicationModule.controller('botCtrl',function($scope,$sce,$timeout){
     //setResponse("Loading...");
   }
 
+$scope.getnow = function(){
+  console.log(baseURL);
+  $http.get(baseURL  + 'gethi').success(function(res){
+      console.log('awdwadawdwadwdwadawdawdwadwa');
+  });
+}
+//$scope.getnow();
 });
