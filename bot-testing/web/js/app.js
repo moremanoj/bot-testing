@@ -2,12 +2,12 @@
 //var transporter = transporter();
 var SampleApplicationModule = angular.module('mybot',[]);
 
-SampleApplicationModule.controller('botCtrl',function($scope,$sce,$timeout,$http){
+SampleApplicationModule.controller('botCtrl',function($scope,$http,$sce,$timeout){
   $scope.session_lst =[];
   $scope.resp="";
   var accessToken = "b6328ec8aaca46e98d4352e17a509f7e";
   var baseUrl = "https://api.api.ai/v1/";
-  var baseURL= "http://localhost:2001/api/";
+  //var baseURL= "http://localhost:2001/api/";
   //var session_lst= [];
 
   $scope.addMessage = function(event) {
@@ -107,17 +107,13 @@ SampleApplicationModule.controller('botCtrl',function($scope,$sce,$timeout,$http
             console.log(obj)
             if(obj.Email){
               console.log("email:",obj.Email);
-              /*$http.post(baseURL + 'sendmail' ,obj).success(function(res) {
+              $http.post(baseURL + 'sendmail' ,obj).success(function(res) {
                   console.log(res);
                   //$scope.outdated=res;
                   //console.log($scope.outdated);
-              })*/
+              })
             }
-            /*$http.post(baseURL + 'sendmail' ,obj).success(function(res) {
-                console.log(res);
-                //$scope.outdated=res;
-                //console.log($scope.outdated);
-            });*/
+            
             $scope.email_id= data.result.parameters.Email;
           }
           var str = JSON.stringify(data.result.fulfillment.speech,undefined,2);
@@ -139,11 +135,11 @@ SampleApplicationModule.controller('botCtrl',function($scope,$sce,$timeout,$http
     //setResponse("Loading...");
   }
 
-$scope.getnow = function(){
-  console.log(baseURL);
+
   $http.get(baseURL  + 'gethi').success(function(res){
-      console.log('awdwadawdwadwdwadawdawdwadwa');
+      console.log('res:',res);
+
   });
-}
+
 //$scope.getnow();
 });

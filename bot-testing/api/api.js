@@ -19,10 +19,10 @@ app.use(bodyParser.urlencoded({ limit: '50mb', extended: true, type:'application
 app.use(bodyParser.json({ type: 'application/*+json' }));
 app.use(bodyParser.raw({ limit: '50mb' }));
 
-//var mailparser = require('./mailparser.js');
-//var mailparser = require('./mailparser.js');
+var mailparser = require('./mailparser.js');
 
-//app.get('/api/gethi',mailparser.gethi);
+
+app.get('/api/gethi',mailparser.gethi);
 
 app.post('/sendmail',function(req,res){
     var data_mail= req.body;
@@ -46,3 +46,5 @@ function send_mail(usermail, mailmatter, mailmessage) {
       }
   });
 };
+
+module.exports = app;
