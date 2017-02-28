@@ -5,23 +5,11 @@ var SampleApplicationModule = angular.module('mybot',[]);
 SampleApplicationModule.controller('botCtrl',function($scope,$http,$sce,$timeout){
   $scope.session_lst =[];
   $scope.resp="";
-  $scope.resp += ' <div class="chat-message padding"><div class="chat-message chat-message-recipient"><img class="chat-image chat-image-default" src="http://www.michaelmammoliti.com/_projects/chat/_media/img/user1.jpg" /><div class="chat-message-wrapper"><div class="chat-message-content"><p>Hello I am Jack,Your personal flight assistant..!!</p></div></div></div></div>';
+  $scope.resp += ' <div class="chat-message padding"><div class="chat-message chat-message-recipient"><img class="chat-image chat-image-default" src="http://www.michaelmammoliti.com/_projects/chat/_media/img/user1.jpg" /><div class="chat-message-wrapper"><div class="chat-message-content"><p>Hello I am Lucy,Your personal flight assistant..!!</p></div></div></div></div>';
   $("#bot").empty();
   $($scope.resp).appendTo('#bot');
 	var accessToken = "d3bf36baa23f41d29d41e6e0619641ae";
 	var baseUrl = "https://api.api.ai/v1/";
-
-	$(document).ready(function() {
-			$("#input").keypress(function(event) {
-				if (event.which == 13) {
-					event.preventDefault();
-					$scope.send();
-				}
-			});
-			$("#rec").click(function(event) {
-				switchRecognition();
-			});
-	});
 
 	var recognition;
 
@@ -70,63 +58,124 @@ SampleApplicationModule.controller('botCtrl',function($scope,$http,$sce,$timeout
 			$("#rec").text(recognition ? "Stop" : "Speak");
 	}
 
-	$scope.send = function() {
-			var text = $("#input").val();
-      $scope.session_lst.push({user : text});
-      $scope.resp += '<div class="chat-message padding"><div class="chat-message chat-message-sender"><img class="chat-image chat-image-default" src="http://www.michaelmammoliti.com/_projects/chat/_media/img/user1.jpg" /><div class="chat-message-wrapper"><div class="chat-message-content"> <p > '+ text +'</p></div></div></div></div>';
-      $("#bot").empty();
-      $($scope.resp).appendTo('#bot');
-      document.getElementById("input").value = "";
-      //console.log('check data');
+  var Fake = [
+    'Hello I am Lucy,Your personal flight assistant..!!',
+    ':)'
+  ]
 
-			$.ajax({
-				type: "POST",
-				url: baseUrl + "query?v=20150910",
-				contentType: "application/json; charset=utf-8",
-				dataType: "json",
-				headers: {
-					"Authorization": "Bearer " + accessToken
-				},
-				data: JSON.stringify({ query: text, lang: "en", sessionId: "somerandomthing" }),
+  var $messages = $('.messages-content'),
+      d, h, m,
+      i = 0;
+  $messages.mCustomScrollbar();
+  setTimeout(function() {
+    $('.message.loading').remove();
+    $('<div class="message new"><figure class="avatar"><img src="img/profile.png" /></figure>' + Fake[i] + '</div>').appendTo($('.mCSB_container')).addClass('new');
+    setDate();
+    updateScrollbar();
+  }, 100);
 
-				success: function(data) {
-          //console.log(data.status.code);
-          if(data.status.code == 200)
-          {
-            var obj = data.result.parameters;
-            if(obj.Email){
-              console.log(obj.R_date);
-              if(obj.R_date == null || obj.R_date ==""){
-                  obj.send_mail = 1;
-              }else{
-                obj.send_mail = 2;
-                if(obj.R_plane_type==null){
-                  obj.R_plane_type = obj.S_plane_type;
-                }
+  function updateScrollbar() {
+    $messages.mCustomScrollbar("update").mCustomScrollbar('scrollTo', 'bottom', {
+      scrollInertia: 10,
+      timeout: 0
+    });
+  }
+
+  function setDate(){
+    d = new Date()
+    if (m != d.getMinutes()) {
+      m = d.getMinutes();
+      $('<div class="timestamp">' + d.getHours() + ':' + m + '</div>').appendTo($('.message:last'));
+    }
+  }
+
+  $('.message-submit').click(function() {
+    insertMessage();
+  });
+
+  $("#chatinput").keypress(function(event) {
+    if (event.which == 13) {
+      insertMessage();
+    }
+  });
+
+  function insertMessage() {
+    var msg = $('.message-input').val();
+    if ($.trim(msg) == '') {
+      return false;
+    }
+    $('<div class="message message-personal">' + msg + '</div>').appendTo($('.mCSB_container')).addClass('new');
+    setDate();
+    $('.message-input').val(null);
+    updateScrollbar();
+    setTimeout(function() {
+      fakeMessage(msg);
+    }, 1000 + (Math.random() * 20) * 100);
+  }
+
+
+  function fakeMessage(msg) {
+    $('<div class="message loading new"><figure class="avatar"><img src="img/profile.png" />"</figure><span></span></div>').appendTo($('.mCSB_container'));
+    updateScrollbar();
+
+
+
+    $.ajax({
+      type: "POST",
+      url: baseUrl + "query?v=20150910",
+      contentType: "application/json; charset=utf-8",
+      dataType: "json",
+      headers: {
+        "Authorization": "Bearer " + accessToken
+      },
+      data: JSON.stringify({ query: msg, lang: "en", sessionId: "somerandomthing" }),
+
+      success: function(data) {
+        //console.log(data.status.code);
+        if(data.status.code == 200)
+        {
+          var obj = data.result.parameters;
+          if(obj.Email){
+            if(obj.R_date==null || obj.R_date==""){
+              obj.send_mail = 1;
+            }else{
+              obj.send_mail = 2;
+              if(obj.R_plane_type==null){
+                obj.R_plane_type = obj.S_plane_type;
               }
-              console.log(obj);
-              $http.post(baseURL  + 'sendmail',obj).success(function(res){
-                  console.log('res:',res);
-              });
             }
-
-            var str = JSON.stringify(data.result.fulfillment.speech,undefined,2);
-            str = str.replace( /"/g, "" );
-            $scope.resp += '<div class="chat-message padding"><div class="chat-message chat-message-recipient"><img class="chat-image chat-image-default" src="http://www.michaelmammoliti.com/_projects/chat/_media/img/user1.jpg" /><div class="chat-message-wrapper"><div class="chat-message-content"><p>'+ str +'</p></div></div></div></div></br>';
-            $("#bot").empty();
-            $($scope.resp).appendTo('#bot');
-            $scope.session_lst.push({bot : str});
-
-            //console.log(obj);
+            console.log(obj);
+            $http.post(baseURL  + 'sendmail',obj).success(function(res){
+                console.log('res:',res);
+            });
           }
-					//setResponse(JSON.stringify(data, undefined, 2));
-				},
-				error: function() {
-					console.log("Internal Server Error");
-				}
-			});
-			//setResponse("Loading...");
-	}
+
+          var str = JSON.stringify(data.result.fulfillment.speech,undefined,2);
+          str = str.replace( /"/g, "" );
+          Fake.push(str);
+
+          setTimeout(function() {
+            $('.message.loading').remove();
+            $('<div class="message new"><figure class="avatar"><img src="img/profile.png" /></figure>' + str + '</div>').appendTo($('.mCSB_container')).addClass('new');
+            setDate();
+            updateScrollbar();
+          }, 1000 + (Math.random() * 20) * 100);
+
+
+          //console.log(obj);
+        }
+        //setResponse(JSON.stringify(data, undefined, 2));
+      },
+      error: function() {
+        console.log("Internal Server Error");
+      }
+    });
+
+  }
+
+
+
+
 
 
 
@@ -196,4 +245,6 @@ SampleApplicationModule.controller('botCtrl',function($scope,$http,$sce,$timeout
   });*/
 
 //$scope.getnow();
+
+
 });
