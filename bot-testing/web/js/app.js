@@ -5,7 +5,7 @@ var SampleApplicationModule = angular.module('mybot',[]);
 SampleApplicationModule.controller('botCtrl',function($scope,$http,$sce,$timeout){
   $scope.session_lst =[];
   $scope.resp="";
-  $scope.resp += ' <p> bot: Hello I am Jack,Your personal flight assistant..!!</p>';
+  $scope.resp += ' <div class="chat-message padding"><div class="chat-message chat-message-recipient"><img class="chat-image chat-image-default" src="http://www.michaelmammoliti.com/_projects/chat/_media/img/user1.jpg" /><div class="chat-message-wrapper"><div class="chat-message-content"><p>Hello I am Jack,Your personal flight assistant..!!</p></div></div></div></div>';
   $("#bot").empty();
   $($scope.resp).appendTo('#bot');
 	var accessToken = "d3bf36baa23f41d29d41e6e0619641ae";
@@ -73,7 +73,7 @@ SampleApplicationModule.controller('botCtrl',function($scope,$http,$sce,$timeout
 	$scope.send = function() {
 			var text = $("#input").val();
       $scope.session_lst.push({user : text});
-      $scope.resp += ' <p > user: '+ text +'</p>';
+      $scope.resp += '<div class="chat-message padding"><div class="chat-message chat-message-sender"><img class="chat-image chat-image-default" src="http://www.michaelmammoliti.com/_projects/chat/_media/img/user1.jpg" /><div class="chat-message-wrapper"><div class="chat-message-content"> <p > '+ text +'</p></div></div></div></div>';
       $("#bot").empty();
       $($scope.resp).appendTo('#bot');
       document.getElementById("input").value = "";
@@ -95,7 +95,10 @@ SampleApplicationModule.controller('botCtrl',function($scope,$http,$sce,$timeout
           {
             var obj = data.result.parameters;
             if(obj.Email){
-              if(obj.R_date!=null){
+              console.log(obj.R_date);
+              if(obj.R_date == null || obj.R_date ==""){
+                  obj.send_mail = 1;
+              }else{
                 obj.send_mail = 2;
                 if(obj.R_plane_type==null){
                   obj.R_plane_type = obj.S_plane_type;
@@ -109,7 +112,7 @@ SampleApplicationModule.controller('botCtrl',function($scope,$http,$sce,$timeout
 
             var str = JSON.stringify(data.result.fulfillment.speech,undefined,2);
             str = str.replace( /"/g, "" );
-            $scope.resp += '<p style="align:left"> bot: '+ str +'</p></br>';
+            $scope.resp += '<div class="chat-message padding"><div class="chat-message chat-message-recipient"><img class="chat-image chat-image-default" src="http://www.michaelmammoliti.com/_projects/chat/_media/img/user1.jpg" /><div class="chat-message-wrapper"><div class="chat-message-content"><p>'+ str +'</p></div></div></div></div></br>';
             $("#bot").empty();
             $($scope.resp).appendTo('#bot');
             $scope.session_lst.push({bot : str});

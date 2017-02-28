@@ -11,9 +11,11 @@
 
   <script src="js/app.js"></script>
   <script src="js/config.js"></script>
-
+<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
 	<style type="text/css">
-
+  body{
+    font-family: 'Roboto', sans-serif;
+  }
     .chat-box{
       padding: 10px;
       width: 100%;
@@ -57,18 +59,136 @@
     :focus{
       outline: 0px;
     }
+    .chat-wrapper {
+  width: 100%;
+  display: table;
+  overflow: hidden;
+}
+.chat-wrapper:before {
+  content: " ";
+  display: block;
+}
+.chat-wrapper .chat-content {
+  background-color: #fff;
+}
+.chat-wrapper .chat-image {
+  float: left;
+  border-radius: 50%;
+}
+.chat-wrapper .chat-image.chat-image-default {
+  width: 60px;
+  height: 60px;
+}
+.chat-wrapper .chat-message {
+  margin-bottom: 20px;
+  width: 100%;
+  display: table;
+  overflow: hidden;
+}
+.chat-wrapper .chat-message:before {
+  content: " ";
+  display: block;
+}
+.chat-wrapper .chat-message:last-of-type {
+  margin-bottom: 0;
+}
+.chat-wrapper .chat-message .chat-message-wrapper {
+  max-width: 70%;
+  display: table;
+  margin: 0 20px;
+  padding-top: 10px;
+  position: relative;
+}
+.chat-wrapper .chat-message .chat-message-wrapper:before {
+  content: " ";
+  display: block;
+  width: 0;
+  height: 0;
+  border: 12px solid transparent;
+  top: 20px;
+  position: absolute;
+  z-index: 2;
+}
+.chat-wrapper .chat-message .chat-message-wrapper p {
+  padding: 10px 20px;
+  color: #fff;
+  border-top: 1px solid;
+}
+.chat-wrapper .chat-message .chat-message-wrapper p:first-of-type {
+  border-top: 0 !important;
+}
+.chat-wrapper .chat-message.chat-message-recipient .chat-message-wrapper,
+.chat-wrapper .chat-message.chat-message-recipient .chat-message-content {
+  float: left;
+}
+.chat-wrapper .chat-message.chat-message-recipient .chat-message-wrapper:before {
+  left: -20px;
+  border-right-color: #91D98A;
+}
+.chat-wrapper .chat-message.chat-message-recipient p {
+  background-color: #91D98A;
+  border-top-color: #7dc576;
+}
+.chat-wrapper .chat-message.chat-message-sender .chat-message-wrapper,
+.chat-wrapper .chat-message.chat-message-sender .chat-message-content {
+  float: right;
+}
+.chat-wrapper .chat-message.chat-message-sender .chat-message-wrapper:before {
+  right: -20px;
+  border-left-color: #8AC0D9;
+}
+.chat-wrapper .chat-message.chat-message-sender p {
+  background: #8AC0D9;
+  border-top-color: #76acc5;
+}
+.chat-wrapper .chat-message.chat-message-sender img {
+  float: right;
+}
+.chat-wrapper .chat-message .chat-message-content {
+  display: table;
+  overflow: hidden;
+  border-radius: 4px;
+}
+.chat-wrapper .chat-message .chat-message-content:before {
+  content: " ";
+  display: block;
+}
+.chat-wrapper .chat-message .chat-details {
+  clear: both;
+  width: 100%;
+  display: table;
+  overflow: hidden;
+}
+.chat-wrapper .chat-message .chat-details:before {
+  content: " ";
+  display: block;
+}
+.chat-wrapper .chat-message .chat-details span {
+  margin-right: 4px;
+  color: #bbb;
+}
+#bot{
+    padding: 30px;
+    border: 2px solid #c9c9c9;
+    border-radius: 15px;
+    height: 350px;
+    overflow: scroll;
+    overflow-x: hidden;
+  }
 	</style>
+
 </head>
 <body ng-controller="botCtrl">
 
 
     <div class="container home-container">
-    <img src="img/pravola-logo.svg"/ style="width: 230px;">
-    <div  class="container" style="overflow-y: auto; height:400px; width:300px; border:1px solid grey">
+    <img src="img/pravola-logo.svg"/ style="width: 230px;"><br><br>
+    <div  class="chat-wrapper">
       <div id="bot">
+
       </div>
       <div>
-        <img src="">
+
       </div>
 	       <!--<textarea type="hidden" disabled  id="response" cols="40" rows="20" placeholder="response"></textarea>-->
    </div>
@@ -78,6 +198,8 @@
          <input id="input" ng-keypress="addMessage($event)" type="text" class="chat-box">
        </div>
      </div>
+
+
    </div>
 </body>
 </html>
