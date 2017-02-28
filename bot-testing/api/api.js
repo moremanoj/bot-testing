@@ -24,27 +24,6 @@ var mailparser = require('./mailparser.js');
 
 app.get('/api/gethi',mailparser.gethi);
 
-app.post('/sendmail',function(req,res){
-    var data_mail= req.body;
-    console.log(data_mail);
-    //var mailmatter = "this is test mail";
-    //send_mail($scope.email_id, mailmatter, "flight details provided.");
-  });
-
-function send_mail(usermail, mailmatter, mailmessage) {
-  var mailOptions = {
-      from: '<operations@80startups.com>', // sender address
-      to: usermail, // list of receivers
-      subject: mailmessage, // Subject line
-      html: mailmatter // html body
-  };
-  transporter.sendMail(mailOptions, function(error, info) {
-      if (error) {
-          console.log(error);
-      } else {
-          console.log('Message sent: ' + info.response);
-      }
-  });
-};
+app.post('/api/sendmail',mailparser.sendmail);
 
 module.exports = app;
