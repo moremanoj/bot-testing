@@ -59,8 +59,8 @@ SampleApplicationModule.controller('botCtrl',function($scope,$http,$sce,$timeout
 	}
 
   var Fake = [
-    'Hello I am Lucy,Your personal flight assistant..!!',
-    ':)'
+    'Hello I am Julia,Your personal flight assistant..!!',
+    ':)',' Where do you wanna fly today ? '
   ]
 
   var $messages = $('.messages-content'),
@@ -69,7 +69,8 @@ SampleApplicationModule.controller('botCtrl',function($scope,$http,$sce,$timeout
   $messages.mCustomScrollbar();
   setTimeout(function() {
     $('.message.loading').remove();
-    $('<div class="message new"><figure class="avatar"><img src="img/profile.png" /></figure>' + Fake[i] + '</div>').appendTo($('.mCSB_container')).addClass('new');
+    $('<div class="message new"><figure class="avatar"><img src="img/profile.png" /></figure>' + Fake[0] + '</div>').appendTo($('.mCSB_container')).addClass('new');
+    $('<div class="message new"><figure class="avatar"><img src="img/profile.png" /></figure>' + Fake[2] + '</div>').appendTo($('.mCSB_container')).addClass('new');
     setDate();
     updateScrollbar();
   }, 100);
