@@ -70,7 +70,8 @@ SampleApplicationModule.controller('botCtrl',function($scope,$http,$sce,$timeout
   setTimeout(function() {
     $('.message.loading').remove();
     $('<div class="message new"><figure class="avatar"><img src="img/profile.png" /></figure>' + Fake[0] + '</div>').appendTo($('.mCSB_container')).addClass('new');
-    $('<div class="message new"><figure class="avatar"><img src="img/profile.png" /></figure>' + Fake[2] + '</div>').appendTo($('.mCSB_container')).addClass('new');
+    fakeMessage(Fake[0]);
+    //$('<div class="message new"><figure class="avatar"><img src="img/profile.png" /></figure>' + Fake[2] + '</div>').appendTo($('.mCSB_container')).addClass('new');
     setDate();
     updateScrollbar();
   }, 100);
@@ -105,6 +106,7 @@ SampleApplicationModule.controller('botCtrl',function($scope,$http,$sce,$timeout
     if ($.trim(msg) == '') {
       return false;
     }
+    console.log(msg);
     $('<div class="message message-personal">' + msg + '</div>').appendTo($('.mCSB_container')).addClass('new');
     setDate();
     $('.message-input').val(null);
@@ -173,77 +175,6 @@ SampleApplicationModule.controller('botCtrl',function($scope,$http,$sce,$timeout
     });
 
   }
-
-
-
-
-
-
-
-
-  /*$scope.send =function() {
-
-    var text = $("#input").val();
-    $scope.session_lst.push({user : text});
-    $scope.resp += ' <p > user: '+ text +'</p>';
-    $("#bot").empty();
-    $($scope.resp).appendTo('#bot');
-    console.log('check data');
-
-
-    //$scope.$watch('$scope.session_lst', function (newValue, oldValue, scope) {
-    //Do anything with $scope.letters
-
-    $scope.email_id="";
-    $.ajax({
-      type: "POST",
-      url: baseUrl + "query?v=20150910",
-      contentType: "application/json; charset=utf-8",
-      dataType: "json",
-      headers: {
-        "Authorization": "Bearer " + accessToken
-      },
-      data: JSON.stringify({ query: text, lang: "en", sessionId: "somerandomthing" }),
-      success: function(data) {
-        console.log(data.status.code);
-        if(data.status.code == 200)
-        {
-          /*if(data.result.parameters["send_mail"] != undefined && data.result.parameters['Email'] != null) {
-            var obj = data.result.parameters;
-            console.log(obj)
-            if(obj.Email){
-              console.log("email:",obj.Email);
-              $http.post(baseURL  + 'sendmail',obj).success(function(res){
-                  console.log('res:',res);
-              });
-            }
-
-            $scope.email_id= data.result.parameters.Email;
-          }
-          var str = JSON.stringify(data.result.fulfillment.speech,undefined,2);
-          str = str.replace( /"/g, "" );
-
-          $scope.resp += '<p style="align:left"> bot: '+ str +'</p></br>';
-          $("#bot").empty();
-          $($scope.resp).appendTo('#bot');
-          //$("#bot").scrollTop($("#bot").prop('scrollHeight'));
-
-          $scope.session_lst.push({bot : str});
-        }
-      },
-      error: function() {
-        console.log("Internal Server Error");
-      }
-    });
-    //});
-    //setResponse("Loading...");
-  }*/
-
-
-  /*$http.get(baseURL  + 'gethi').success(function(res){
-      console.log('res:',res);
-
-  });*/
 
 //$scope.getnow();
 
