@@ -7,6 +7,7 @@ SampleApplicationModule.controller('botCtrl',function($scope,$http,$sce,$timeout
   $scope.resp="";
   $scope.resp += ' <div class="chat-message padding"><div class="chat-message chat-message-recipient"><img class="chat-image chat-image-default" src="http://www.michaelmammoliti.com/_projects/chat/_media/img/user1.jpg" /><div class="chat-message-wrapper"><div class="chat-message-content"><p>Hello I am Lucy,Your personal flight assistant..!!</p></div></div></div></div>';
   $("#bot").empty();
+  $scope.diff_button = true;
   $($scope.resp).appendTo('#bot');
 	var accessToken = "d3bf36baa23f41d29d41e6e0619641ae";
 	var baseUrl = "https://api.api.ai/v1/";
@@ -60,8 +61,10 @@ SampleApplicationModule.controller('botCtrl',function($scope,$http,$sce,$timeout
 
   var Fake = [
     'Hello I am Julia,Your personal flight assistant..!!',
-    ':)',' Where do you wanna fly today ? '
-  ]
+    ':)',
+    ' Where do you wanna fly today ? ',
+    '<div><h4>Great, I have listed few types, choose your desired one:</h4>Enter whichever you want..!!<button >1. very light jet</button><button>2. Light jet</button><button>3. Meduim size jet</button><button>4. super meduim jet</button><button>5. heavy jet</button><button>6. turbo pro jet</button></div>'
+    ]
 
   var $messages = $('.messages-content'),
       d, h, m,
@@ -118,10 +121,9 @@ SampleApplicationModule.controller('botCtrl',function($scope,$http,$sce,$timeout
 
 
   function fakeMessage(msg) {
+    //$scope.diff_button = true;
     $('<div class="message loading new"><figure class="avatar"><img src="img/profile.png" />"</figure><span></span></div>').appendTo($('.mCSB_container'));
     updateScrollbar();
-
-
 
     $.ajax({
       type: "POST",
@@ -134,6 +136,7 @@ SampleApplicationModule.controller('botCtrl',function($scope,$http,$sce,$timeout
       data: JSON.stringify({ query: msg, lang: "en", sessionId: "somerandomthing" }),
 
       success: function(data) {
+        var x = [];
         //console.log(data.status.code);
         if(data.status.code == 200)
         {
@@ -154,9 +157,16 @@ SampleApplicationModule.controller('botCtrl',function($scope,$http,$sce,$timeout
           }
 
           var str = JSON.stringify(data.result.fulfillment.speech,undefined,2);
+          x = document.getElementsByTagName("P");
+          if(x.length!=0){
+              $scope.diff_button = false;
+            }else{
+              $scope.diff_button = true;
+            }
           str = str.replace( /"/g, "" );
           Fake.push(str);
 
+          console.log(x);
           setTimeout(function() {
             $('.message.loading').remove();
             $('<div class="message new"><figure class="avatar"><img src="img/profile.png" /></figure>' + str + '</div>').appendTo($('.mCSB_container')).addClass('new');
@@ -164,7 +174,7 @@ SampleApplicationModule.controller('botCtrl',function($scope,$http,$sce,$timeout
             updateScrollbar();
           }, 1000 + (Math.random() * 20) * 100);
 
-
+          x=[];
           //console.log(obj);
         }
         //setResponse(JSON.stringify(data, undefined, 2));
