@@ -1,0 +1,162 @@
+
+<html>
+<head>
+  <srcipt src="lib/jquery.min.js"></script>
+	<title>Socket.io Example</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+	<script type="text/javascript">
+		var accessToken = "8628cfe17af541ca999ebe19ec4304db";
+		var baseUrl = "https://api.api.ai/v1/";
+
+    $(document).ready(function() {
+			$("#input").keypress(function(event) {
+				if (event.which == 13) {
+					event.preventDefault();
+					send();
+          event.currentTarget.value = "";
+				}
+
+			});
+			$("#rec").click(function(event) {
+				switchRecognition();
+			});
+		});
+
+		var recognition;
+		function startRecognition() {
+			recognition = new webkitSpeechRecognition();
+			recognition.onstart = function(event) {
+				updateRec();
+			};
+			recognition.onresult = function(event) {
+				var text = "";
+			    for (var i = event.resultIndex; i < event.results.length; ++i) {
+			    	text += event.results[i][0].transcript;
+			    }
+			    setInput(text);
+				stopRecognition();
+			};
+			recognition.onend = function() {
+				stopRecognition();
+			};
+			recognition.lang = "en-US";
+			recognition.start();
+		}
+
+		function stopRecognition() {
+			if (recognition) {
+				recognition.stop();
+				recognition = null;
+			}
+			updateRec();
+		}
+		function switchRecognition() {
+			if (recognition) {
+				stopRecognition();
+			} else {
+				startRecognition();
+			}
+		}
+		function setInput(text) {
+			$("#input").val(text);
+			send();
+		}
+		function updateRec() {
+			$("#rec").text(recognition ? "Stop" : "Speak");
+		}
+		function send() {
+			var text = $("#input").val();
+
+			$.ajax({
+				type: "POST",
+				url: baseUrl + "query?v=20150910",
+				contentType: "application/json; charset=utf-8",
+				dataType: "json",
+				headers: {
+					"Authorization": "Bearer " + accessToken
+				},
+				data: JSON.stringify({ query: text, lang: "en", sessionId: "somerandomthing" }),
+				success: function(data) {
+          console.log(data);
+					setResponse(JSON.stringify(data.result.fulfillment.speech,undefined,2));
+				},
+				error: function() {
+					setResponse("Internal Server Error");
+				}
+			});
+			setResponse("Loading...");
+		}
+		function setResponse(val) {
+      console.log(val);
+      var str = val;
+      str = str.replace( /"/g, "" );
+			$("#response").text(str);
+		}
+	</script>
+	<style type="text/css">
+
+    .chat-box{
+      padding: 10px;
+      width: 100%;
+      font-size: 17px;
+      border-radius: 35px;
+      box-shadow: none;
+      border: 2px solid #bdbdbd;
+    }
+    .top-box{
+      position: relative;
+      padding: 30px 0;
+    }
+    .send-btn{
+      position: absolute;
+      right: 0px;
+      padding: 11px 50px;
+      font-size: 18px;
+      border-radius: 40px;
+      background: #4498ef;
+      border: none;
+      color: #fff;
+      top: 31px;
+    }
+    .home-container{
+      max-width: 480px;
+      margin: 50px auto;
+      text-align: center;
+    }
+    textarea{
+      width: 100%;
+      border-radius: 10px;
+      border: 2px solid #dadada;
+      font-size: 18px;
+      margin: 50px 0 0;
+      height: 300px;
+      overflow: scroll;
+      overflow-x: hidden;
+      padding: 20px;
+      color: #000;
+    }
+    :focus{
+      outline: 0px;
+    }
+	</style>
+</head>
+<body>
+  <div class="container home-container">
+    <img src="img/pravola-logo.svg"/ style="width: 230px;">
+    <div class="container" style="height:200px; width:200px; border:1px solid grey">
+	     <textarea disabled id="response" cols="40" rows="20" placeholder="response"></textarea>
+
+       <div>
+          <p></p>
+       </div>
+    <div>
+   <div class="col-sm-12 main-wrapper">
+      <div class="top-box">
+         <input id="input" type="text" class="chat-box">
+     </div>
+   </div>
+	</div>
+</div>
+</body>
+</html>
